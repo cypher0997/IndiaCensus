@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class IndiaCensusAnalyser {
 
 
-    public int readIndianCensusCsvData(String csvFilePath) throws IOException{
+    public int readIndianCensusCsvData(String csvFilePath) throws IndiaCensusException {
         int count =0;
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
@@ -35,6 +35,7 @@ public class IndiaCensusAnalyser {
             }
 
         } catch (IOException e) {
+            throw new IndiaCensusException("file not found,or wrong file path", IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         return count;
     }

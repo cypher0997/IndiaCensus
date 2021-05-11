@@ -19,7 +19,18 @@ public class IndiaCensusAnalyserTest {
             IndiaCensusAnalyser censusAnalyser = new IndiaCensusAnalyser();
             int numOfRecords = censusAnalyser.readIndianCensusCsvData(INDIA_CENSUS_CSV_FILE_PATH);
             Assert.assertEquals(29, numOfRecords);
-        } catch (IOException e) {
+        } catch (IndiaCensusException e) {
+        }
+    }
+
+    @Test
+    public void wrongCsvFilePassedAsArguement_test() {
+        try {
+            IndiaCensusAnalyser censusAnalyser = new IndiaCensusAnalyser();
+            int num = censusAnalyser.readIndianCensusCsvData(WRONG_CSV_FILE_PATH);
+            Assert.assertEquals(29,num);
+        } catch (IndiaCensusException e) {
+            Assert.assertEquals(IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM,e.typeOfException);
         }
     }
 }
