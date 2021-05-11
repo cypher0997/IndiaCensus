@@ -5,11 +5,12 @@ import ICA.IndiaCensusException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+
 
 public class IndiaCensusAnalyserTest {
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
+    private static final String INCORRECT_FILE_TYPE = "./src/test/resources/IndiaStateCensusData.pdf";
     private Assertions Assert;
 
 
@@ -33,4 +34,18 @@ public class IndiaCensusAnalyserTest {
             Assert.assertEquals(IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM,e.typeOfException);
         }
     }
+
+    @Test
+    public void wrongTypeOfFilePassedAsArguement_test() {
+        try {
+            IndiaCensusAnalyser censusAnalyser = new IndiaCensusAnalyser();
+            int num = censusAnalyser.readIndianCensusCsvData(INCORRECT_FILE_TYPE);
+            Assert.assertEquals(29,num);
+        } catch (IndiaCensusException e) {
+            Assert.assertEquals(IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM,e.typeOfException);
+            System.out.println(e.warning);
+        }
+    }
+    
 }
+

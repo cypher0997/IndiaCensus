@@ -7,12 +7,18 @@ public class IndiaCensusException extends Exception{
         this.warning =message;
     }
     public enum ExceptionType {
-        CENSUS_FILE_PROBLEM, UNABLE_TO_PARSE,  NO_CENSUS_DATA, CSV_FILE_INTERNAL_ISSUES
+        CENSUS_FILE_PROBLEM,WRONG_FILE_TYPE,CSV_FILE_INTERNAL_ISSUES
     }
     public ExceptionType typeOfException;
 
     public IndiaCensusException(String message , ExceptionType type){
         this.warning = message;
         this.typeOfException = type;
+    }
+
+    public IndiaCensusException(String message , ExceptionType type,Throwable give){
+        this.warning = message;
+        this.typeOfException = type;
+
     }
 }

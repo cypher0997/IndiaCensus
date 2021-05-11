@@ -5,3 +5,5 @@ ICA/IndiaCensusException.java
  ICA.IndiaCensusException$ExceptionType
 ICA/IndiaCensusAnalyser.java
  ICA.IndiaCensusAnalyser
+ICA/test.java
+ ICA.test

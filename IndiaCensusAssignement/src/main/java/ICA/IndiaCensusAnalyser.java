@@ -3,6 +3,7 @@ package ICA;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -35,7 +36,7 @@ public class IndiaCensusAnalyser {
             }
 
         } catch (IOException e) {
-            throw new IndiaCensusException("file not found,or wrong file path", IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new IndiaCensusException("file not found,or wrong file type", IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
         return count;
     }
