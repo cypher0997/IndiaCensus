@@ -3,7 +3,6 @@ package ICA;
 import com.opencsv.bean.CsvToBean;
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -13,7 +12,7 @@ import java.util.Iterator;
 public class IndiaCensusAnalyser {
 
 
-    public int readIndianCensusCsvData(String csvFilePath) throws IndiaCensusException {
+    public int readIndianCensusCsvData(String csvFilePath) throws IndiaCensusException1{
         int count =0;
         try (
                 Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
@@ -28,15 +27,12 @@ public class IndiaCensusAnalyser {
             while (csvUserIterator.hasNext()) {
                 count++;
                 IndiaCensusData csvUser = csvUserIterator.next();
-                System.out.println("state: " + csvUser.getState());
-                System.out.println("population : " + csvUser.getPopulation());
-                System.out.println("density : " + csvUser.getDensityPerSqKm());
-                System.out.println("area: " + csvUser.getAreaInSqKm());
-                System.out.println("==========================");
             }
 
         } catch (IOException e) {
-            throw new IndiaCensusException("file not found,or wrong file type", IndiaCensusException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new IndiaCensusException1("file not found,or wrong file type", IndiaCensusException1.ExceptionType.CENSUS_FILE_PROBLEM);
+        }catch(RuntimeException x){
+            throw new IndiaCensusException1("internal issue with file detected", IndiaCensusException1.ExceptionType.CSV_FILE_INTERNAL_ISSUES);
         }
         return count;
     }
